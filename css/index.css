@@ -1,0 +1,28 @@
+@import url("./Containers.css");
+@import url("./Text.css");
+@import url("./Buttons.css");
+@import url("./Table.css");
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+:root{
+    --theme:#777;
+    --texttheme:#333;
+    --headertheme:lime;
+    --bordertheme:rgb(255, 255, 255);
+}
+/* CSS files add styling rules to your content */
+body {
+    font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
+    margin: 2em;
+    overflow-x: hidden;
+  }
+  
+  h1 {
+    font-style: italic;
+  }
+.bgtext{
+    color:var(--bordertheme)
+}

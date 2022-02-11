@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Test</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <!--type="image/x-icon"-->
+    <link rel="icon" href="./favicon.ico" />
+    <script type="module" src="js/Index.js" ></script>
+</head>
+    <body>
+            <div class="aside-container">
+                <div><h3>song:</h3>&nbsp;<span>straight up</span></div>
+                <iframe class="iframe-container" id="player"
+                src="https://www.youtube.com/embed/A2KI_totYb4?controls=1" allowfullscreen>
+                </iframe>
+                
+                <div>><span>artist:</span>&nbsp;<span>paula abdul</span></div>
+                <div>><span>album:&nbsp;</span><span>forever you girl</span></div>
+                <form id="form"><h6 id="upload" class="bgtext">#</h6>
+                    <th>
+                       <input
+                       id="ins0"
+                       type="text" name="ins0" placeholder="nuova canzione"/>
+                    </th>
+                    <th>
+                        <input 
+                        id="ins1"
+                        type="text" name="ins1" placeholder="cantante"/>
+                    </th>
+                    <th>
+                        <input 
+                        id="ins2"
+                        type="text" name="ins2" placeholder="album"/>
+                    </th>
+                    <th>
+                        <input 
+                        id="ins3"
+                        type="text" name="ins3" placeholder="durazione"/>
+                    </th>
+                    <th>
+                        <input 
+                        id="ins4"
+                        type="text" name="ins4" placeholder="youtube-code"/>
+                    </th>
+                        <input type="submit" />
+                        <input type="reset" onclick="restart()"/>
+                </form> 
+            </div>
+            <div class="playlist-container">
+                <div class="table-container">
+                 <table class="table">
+                    <thead><h3>my playlist<h3>
+                        <tr class="uppercase">
+                            <th>
+                            <input type="text" class="search-input" placeholder="id"/>
+                            </th>
+                            <th>
+                                <input type="text" class="search-input" placeholder="cancion"/>
+                            </th>
+                            <th>
+                                <input type="text" class="search-input" placeholder="autor"/>
+                            </th>
+                            <th>
+                                <input type="text" class="search-input" placeholder="album"/>
+                            </th>
+                            <th>
+                                <input type="text" class="search-input" placeholder="duracion"/>
+                            </th>
+                            <th>update</th>
+                            <th>delete</th>  
+                        </tr>
+                    </thead>
+                    <tbody id="playList">
+                    </tbody>
+                </table>   
+                </div>
+            </div>
+            
+            <script>
+            function myTableList(){
+                const list = listofSongs()
+                list.map(x=>{
+                root.innerHTML +=  
+                '<tr><td class="capitalize" data-label="id"><input type="button" class="button-play" onclick="play('+`${x.id}`+')" value="play"/></td>'+
+                '<td class="capitalize" data-label="song">'+
+                x.song
+                +'</td>'+
+                '<td class="capitalize" data-label="artist">'+x.author+'</td>'+
+                '<td class="capitalize" data-label="album">'+x.album+'</td>'+
+                '<td class="capitalize" data-label="duration">'+x.duration+'</td>'+
+                '<td class="capitalize" data-label="update"><a onclick="reset('+`${x.id}`+')">update</a></td>'+
+                '<td class="capitalize" data-label="delete"><a onclick="trash('+`${x.id}`+')">delete</a></td></tr>'        
+                })
+            }
+            function restart(){
+                const myChar = document.querySelector("#upload")
+                myChar.innerHTML = "#"
+            }
+            function listofSongs(){
+                const songs = JSON.parse(localStorage.getItem("myPlaylist")||"[]")
+                return songs
+            }
+            function play(id){
+                console.log(id)
+                const youtube = document.getElementById("player")
+                const songs = listofSongs()
+                const existing = songs.find(song => song.id == id)  
+                youtube.src = existing.code
+                console.log(existing.code)  
+            }
+            function reset(id){
+                const charid = document.getElementById("upload")
+                const song = document.getElementById("ins0")
+                const author = document.getElementById("ins1")
+                const album = document.getElementById("ins2")
+                const duration = document.getElementById("ins3")
+                const code = document.getElementById("ins4")
+                const list = listofSongs()
+                const mysong = list.find(song => song.id == id)
+                charid.innerHTML = id
+                song.value = mysong.song
+                author.value = mysong.author
+                album.value = mysong.album
+                duration.value = mysong.duration
+                myTableList()
+            }
+            function trash(id){
+                const trash = listofSongs()
+                const toBin = trash.find(s => s.id == id)
+                alert("Warning: "+`${toBin.song}`+" will be deleted!")
+                const restore = trash.filter(s => s.id != id)
+                localStorage.setItem("myPlaylist", JSON.stringify(restore)) 
+                console.log(trash)
+                myTableList()
+            }
+            </script>
+    </body>
+    
+</html>

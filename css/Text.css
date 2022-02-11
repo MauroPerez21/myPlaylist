@@ -1,0 +1,110 @@
+h1 
+{   font-size:2em;
+    font-style: italic;
+    text-align: center;
+    text-transform: uppercase; 
+}
+h2
+{   font-size:2em;
+    font-style: italic;
+    text-align: center; 
+    text-transform: uppercase; 
+}
+h3
+{
+    font-size:2em;
+    padding-right: 4em;
+    text-align: left;
+    text-transform: uppercase; 
+}
+h4
+{font-size:1.5em;
+    text-indent: 4em;
+    font-style: oblique;
+    text-transform:uppercase;
+}
+h5
+{font-size:1.5em;
+    text-indent: 6em;
+    font-style: oblique;
+    text-transform: uppercase;
+}
+h6
+{font-size:1.5em;
+    text-indent: 8em;
+    font-style: oblique;
+    text-transform:capitalize;
+}
+p{
+    text-align: justify;
+}
+em{
+    font-weight: bolder;
+    font-style: italic;
+    text-indent:12em;
+}
+.uppercase{
+    text-transform: uppercase;
+}
+.capitalize{
+    text-transform: capitalize;
+}
+.brush{
+    font-family: 'Brush Script MT', cursive;
+  }
+.trebuchet{
+font-family: 'Trebuchet MS', sans-serif;
+}
+.arial{
+    font-family: Arial, sans-serif;
+}
+.tahoma{
+    font-family: Tahoma, sans-serif;
+}
+.helvetica{
+    font-family: Helvetica, sans-serif;
+    
+}
+.verdana{
+    font-family: Verdana, sans-serif;
+}
+.roboto{
+    font-family:'Roboto', sans-serif;
+}
+.droid-sans{
+    font-family: 'droid-sans', sans-serif;
+    text-transform: capitalize;
+}
+
+@supports (-webkit-text-stroke: 2px var(--bordertheme)) {
+    .text-theme {
+      -webkit-text-stroke: 1px var(--bordertheme);
+      -webkit-titles-fill-color: var(--titlestheme);
+    }
+  }
+.stroke{
+    -webkit-text-fill-color: var(--titlestheme); /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: var(--bordertheme);
+}
+/*LISTS*/
+.list-square  {
+    list-style: square;
+}
+
+.list li {
+    margin-left: 10%;
+    line-height: 1.5em;
+    letter-spacing: 0.25em;
+    color:var(--bordertheme);
+    text-align:left;
+}
+::marker{
+    color:var(--bordertheme);
+    unicode-bidi: isolate;
+    font-variant-numeric: tabular-nums;
+    text-transform: none;
+    text-indent: 0 !important;
+    text-align: start !important;
+    text-align-last: start !important;
+}
