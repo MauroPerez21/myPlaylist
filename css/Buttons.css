@@ -12,6 +12,7 @@ a
     text-decoration:none;
     border-radius: 6px;
     background:var(--texttheme);
+    cursor:pointer;
 }
 a:hover
 {

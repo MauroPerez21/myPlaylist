@@ -30,10 +30,19 @@ export default class Api{
     }
     static saveOne(newSong){
         const songs = Api.getAllSongs()
-        console.table(newSong)
-        songs.push(newSong)
-        localStorage.setItem("myPlaylist",JSON.stringify(songs))
-        console.log(newSong.song+'\t'+"saved!")
+        console.log(typeof(newSong.song))
+        const song = newSong.song
+        !song? alert("El campo canción esta vacio"): pushOne();
+
+        function pushOne(){
+            songs.push(newSong)
+            localStorage.setItem("myPlaylist",JSON.stringify(songs))
+            setTimeout(()=>{
+                alert("Haz click en actualizar")
+            }, 2000)
+            alert(newSong.song+'\t'+"saved!") 
+        }
+        
     }
     static trashOne(refValue, list){
         const restore = list.filter(s => s.id != refValue)

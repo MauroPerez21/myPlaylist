@@ -12,23 +12,23 @@
 </head>
     <body>
             <div class="aside-container">
-                <div><h3>song:</h3>&nbsp;<span>straight up</span></div>
+                <div><h3>song:</h3>&nbsp;<span id="display" class="uppercase">straight up</span></div>
                 <iframe class="iframe-container" id="player"
                 src="https://www.youtube.com/embed/A2KI_totYb4?controls=1" allowfullscreen>
                 </iframe>
                 
-                <div>><span>artist:</span>&nbsp;<span>paula abdul</span></div>
-                <div>><span>album:&nbsp;</span><span>forever you girl</span></div>
+                <div>><span>artist:</span>&nbsp;<span id="artist" class="capitalize">paula abdul</span></div>
+                <div>><span>album:&nbsp;</span><span id="disco" class="capitalize">forever you girl</span></div>
                 <form id="form"><h6 id="upload" class="bgtext">#</h6>
                     <th>
                        <input
                        id="ins0"
-                       type="text" name="ins0" placeholder="nuova canzione"/>
+                       type="text" name="ins0" placeholder="nueva cancion"/>
                     </th>
                     <th>
                         <input 
                         id="ins1"
-                        type="text" name="ins1" placeholder="cantante"/>
+                        type="text" name="ins1" placeholder="artista"/>
                     </th>
                     <th>
                         <input 
@@ -38,13 +38,13 @@
                     <th>
                         <input 
                         id="ins3"
-                        type="text" name="ins3" placeholder="durazione"/>
+                        type="text" name="ins3" placeholder="duracion"/>
                     </th>
                     <th>
                         <input 
                         id="ins4"
-                        type="text" name="ins4" placeholder="youtube-code"/>
-                    </th>
+                        type="text" name="ins4" placeholder="codigo-de-youtube"/>
+                    </th><br>
                         <input type="submit" />
                         <input type="reset" onclick="restart()"/>
                 </form> 
@@ -53,6 +53,7 @@
                 <div class="table-container">
                  <table class="table">
                     <thead><h3>my playlist<h3>
+                        <span><a href="/">actualizar</a></span>
                         <tr class="uppercase">
                             <th>
                             <input type="text" class="search-input" placeholder="id"/>
@@ -106,9 +107,15 @@
             function play(id){
                 console.log(id)
                 const youtube = document.getElementById("player")
+                const display = document.querySelector("#display")
+                const artist = document.querySelector("#artist")
+                const disco = document.querySelector("#disco")
                 const songs = listofSongs()
                 const existing = songs.find(song => song.id == id)  
                 youtube.src = existing.code
+                display.innerHTML = existing.song
+                artist.innerHTML = existing.author
+                disco.innerHTML = existing.album
                 console.log(existing.code)  
             }
             function reset(id){
@@ -128,13 +135,19 @@
                 myTableList()
             }
             function trash(id){
-                const trash = listofSongs()
-                const toBin = trash.find(s => s.id == id)
-                alert("Warning: "+`${toBin.song}`+" will be deleted!")
-                const restore = trash.filter(s => s.id != id)
-                localStorage.setItem("myPlaylist", JSON.stringify(restore)) 
-                console.log(trash)
-                myTableList()
+                var msg=""
+                let isBoolean = confirm("Eliminarás la canción?")
+                !isBoolean ? msg="Edita tu playlist": erase();
+                function erase(){
+                    const trash = listofSongs()
+                    const toBin = trash.find(s => s.id == id)
+                    alert("Warning: "+`${toBin.song}`+" will be deleted!")
+                    const restore = trash.filter(s => s.id != id)
+                    localStorage.setItem("myPlaylist", JSON.stringify(restore)) 
+                    console.log(trash) 
+                }
+                
+               
             }
             </script>
     </body>
